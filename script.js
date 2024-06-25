@@ -1,6 +1,3 @@
-'use strict';
-
-
 
 /**
  * PRELOAD
@@ -15,6 +12,47 @@ window.addEventListener("load", function () {
   document.body.classList.add("loaded");
 });
 
+// it is retrieving data
+let saveFile = () => {
+  // Get the data from each element on the form.
+  const name = document.getElementById("name");
+  const phone = document.getElementById("phone");
+  const person = document.getElementById("person");
+  const date=document.getElementById("date")
+  const time = document.getElementById("time");
+  const Amsg = document.getElementById("msg");
+
+  // This variable stores all the data.
+  let data = "\r Name: " + name.value + " \r\n " + "Phone: " + phone.value + " \r\n " + "Person: " + person.value + " \r\n "+ "Date: " + date.value + "Time: " + time.value + " \r\n " + "Message: " + msg.value;
+  console.log(data); //printing form data into the console
+  // Convert the text to BLOB.
+  const textToBLOB = new Blob([data], { type: "text/plain" });
+  var filename = new Date();
+  var month =new Date(); //months from 1-12
+  month = month.getMonth();
+
+  var day = new Date();
+  var day = day.getUTCDate();
+
+  var year = new Date();
+  var year = year.getUTCFullYear();
+
+  newdate = year + "/" + month + "/" + day;
+  const sFileName = filename; // The file to save the data.
+
+  let newLink = document.createElement("a");
+  newLink.download = new Date();
+
+  if (window.webkitURL != null) {
+      newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+  } else {
+      newLink.href = window.URL.createObjectURL(textToBLOB);
+      newLink.style.display = "none";
+      document.body.appendChild(newLink);
+  }
+
+  newLink.click();
+};
 
 
 /**
@@ -33,50 +71,11 @@ const addEventOnElements = function (elements, eventType, callback) {
  * NAVBAR
  */
 
-const navbar = document.querySelector("[data-navbar]");
-const navTogglers = document.querySelectorAll("[data-nav-toggler]");
-const overlay = document.querySelector("[data-overlay]");
-
-const toggleNavbar = function () {
-  navbar.classList.toggle("active");
-  overlay.classList.toggle("active");
-  document.body.classList.toggle("nav-active");
-}
-
-addEventOnElements(navTogglers, "click", toggleNavbar);
-
 
 
 /**
  * HEADER & BACK TOP BTN
  */
-
-const header = document.querySelector("[data-header]");
-const backTopBtn = document.querySelector("[data-back-top-btn]");
-
-let lastScrollPos = 0;
-
-const hideHeader = function () {
-  const isScrollBottom = lastScrollPos < window.scrollY;
-  if (isScrollBottom) {
-    header.classList.add("hide");
-  } else {
-    header.classList.remove("hide");
-  }
-
-  lastScrollPos = window.scrollY;
-}
-
-window.addEventListener("scroll", function () {
-  if (window.scrollY >= 50) {
-    header.classList.add("active");
-    backTopBtn.classList.add("active");
-    hideHeader();
-  } else {
-    header.classList.remove("active");
-    backTopBtn.classList.remove("active");
-  }
-});
 
 
 
