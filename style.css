@@ -262,8 +262,9 @@
   .label-2 { font-size: var(--fontSize-label-2); }
   
   
-  button:active{
-    background-color: transparent;
+  .nav-open-btn{
+    -webkit-tap-highlight-color: transparent;
+    
   }
   
   
